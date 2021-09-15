@@ -10,6 +10,8 @@ from src.database import Bookmark,db
 
 # app = Flask(__name__, instance_relative_config=True)
 
+from flasgger import Swagger, swag_from
+from src.config.swagger import template, swagger_config
 
 def create_app(test_config=None):
 
@@ -36,8 +38,10 @@ def create_app(test_config=None):
     app.register_blueprint(auth)
     app.register_blueprint(bookmarks)
 
+    Swagger(app, config=swagger_config, template=template)
 
     @app.get('/<short_url>')
+    @swag_from('./docs/short_url.yaml')
     def redirect_to_url(short_url):
         bookmark = Bookmark.query.filter_by(short_url=short_url).first_or_404()
 

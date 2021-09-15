@@ -8,6 +8,8 @@ from src.constants.http_status_codes import HTTP_200_OK, HTTP_201_CREATED, HTTP_
 
 from src.database import Bookmark,db
 
+from flasgger import swag_from
+
 bookmarks = Blueprint("bookmarks",__name__,url_prefix="/api/v1/bookmarks")
 
 
@@ -152,6 +154,7 @@ def delete_bookmark(id):
 
 @bookmarks.get("/stats")
 @jwt_required()
+@swag_from("./docs/bookmarks/stats.yaml")
 def get_stats():
     current_user = get_jwt_identity()
 
