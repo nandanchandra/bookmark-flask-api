@@ -1,4 +1,3 @@
-from threading import current_thread
 import validators
 
 from flask import Blueprint,request,jsonify
@@ -9,6 +8,7 @@ from src.constants.http_status_codes import HTTP_200_OK, HTTP_201_CREATED, HTTP_
 from src.database import Bookmark,db
 
 from flasgger import swag_from
+# from flasgger.utils import swag_from
 
 bookmarks = Blueprint("bookmarks",__name__,url_prefix="/api/v1/bookmarks")
 
